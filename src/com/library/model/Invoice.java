@@ -1,12 +1,12 @@
 package com.library.model;
 
-public class Invoice { // Değiştirilen isim: Transaction yerine Invoice
+public class Invoice {
     private int id;
     private User user;
     private Book book;
     private boolean returned;
 
-    public Invoice(int id, User user, Book book, boolean returned) { // Değiştirilen isim: Transaction yerine Invoice
+    public Invoice(int id, User user, Book book, boolean returned) {
         this.id = id;
         this.user = user;
         this.book = book;
@@ -47,7 +47,7 @@ public class Invoice { // Değiştirilen isim: Transaction yerine Invoice
 
     @Override
     public String toString() {
-        return "Invoice{" + // Değiştirilen isim: Transaction yerine Invoice
+        return "Invoice{" +
                 "id=" + id +
                 ", user=" + user +
                 ", book=" + book +

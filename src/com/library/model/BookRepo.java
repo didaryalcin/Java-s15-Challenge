@@ -7,20 +7,20 @@ import java.util.List;
 
 public class BookRepo implements LibraryBookService {
 
-    private Data data; // Değiştirilen isim: Database yerine Data
-    public BookRepo(Data data){ // Değiştirilen isim: Database yerine Data
-        this.data = data; // Değiştirilen isim: Database yerine Data
+    private Data data;
+    public BookRepo(Data data){
+        this.data = data;
     }
 
     @Override
     public void addBook(Book book){
-        data.addBook(book); // Değiştirilen isim: database yerine data
+        data.addBook(book);
         System.out.println("Book added successfully.");
     }
 
     @Override
     public Book getBookById(int id){
-        return data.getBookById(id); // Değiştirilen isim: database yerine data
+        return data.getBookById(id);
     }
 
     @Override
