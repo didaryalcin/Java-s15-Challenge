@@ -27,8 +27,8 @@ public class Data {
         invoices = new HashMap<>();
 
         User user1 = new User(1, "Didar", "Yalçın", "ddrylcn@gmail.com", "1234", new ArrayList<>());
-        User user2 = new User(2, "Siera", "Moe", "john@example.com", "password", new ArrayList<>());
-        User user3 = new User(3, "Row", "Smith", "jane@example.com", "pass123", new ArrayList<>());
+        User user2 = new User(2, "Siera", "Moe", "siera@example.com", "password", new ArrayList<>());
+        User user3 = new User(3, "Row", "Smith", "row@example.com", "pass123", new ArrayList<>());
 
         users.put(user1.getUserId(), user1);
         users.put(user2.getUserId(), user2);
