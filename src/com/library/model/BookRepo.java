@@ -38,7 +38,14 @@ public class BookRepo implements LibraryBookService {
         return data.getBooksByAuthor(authorName);
     }
 
-
+    @Override
+    public void updateBook(Book book){
+        if(data.getBooksByTitle(book.getTitle()).equals(book.getTitle())){
+            data.updateBook(book);
+            System.out.println("Book information updated.");
+        }else {
+            System.out.println("Book not found.");
+        }
     }
 
     @Override
