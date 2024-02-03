@@ -11,6 +11,14 @@ public class User {
     private String password;
     private List<Book> borrowedBooks;
 
+    public User(int userId, String name, String surname, String email, String password, List<Book> borrowedBooks) { // Değiştirilen isim: user_id yerine userId
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.borrowedBooks = borrowedBooks;
+    }
 
     public int getUserId() {
         return userId;
