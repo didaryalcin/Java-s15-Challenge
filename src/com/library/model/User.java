@@ -85,15 +85,6 @@ public class User {
         return Objects.hash(userId, email);
     }
 
-    @Override
-    public String toString() {
-        return "UserService{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", borrowedBooks=" + borrowedBooks +
-                '}';
+
     }
 }
