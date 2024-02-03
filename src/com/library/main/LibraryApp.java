@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class LibraryApp {
 
-    private static Scanner scanner = new Scanner(System.in);
+
     private static Data data = new Data();
     private static UserService userService = new UserService(data);
     private static BookRepo bookRepo = new BookRepo(data);
