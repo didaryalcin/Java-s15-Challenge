@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Data {
-    private AtomicInteger transactionIdCounter = new AtomicInteger(1);
+    private AtomicInteger invoiceIdCounter = new AtomicInteger(1);
 
     public int generateNewTransactionId() {
-        return transactionIdCounter.getAndIncrement();
+        return invoiceIdCounter.getAndIncrement();
     }
 
-    private Map<Integer, Book> books;
-    private Map<Integer, User> users;
-    private Map<Integer, Invoice> invoices;
-    private Map<String, Author> authors;
+    private Map<Integer, Book> books = new ConcurrentHashMap<>();
+    private Map<Integer, User> users = new ConcurrentHashMap<>();
+    private Map<Integer, Invoice> invoices = new ConcurrentHashMap<>();
+    private Map<String, Author> authors = new ConcurrentHashMap<>();
 
     public Data(){
         books = new HashMap<>();
@@ -83,9 +84,8 @@ public class Data {
     public void deleteBook(int id) {
         if (books.containsKey(id)) {
             books.remove(id);
-            System.out.println("Book deleted successfully.");
         } else {
-            System.out.println("Book not found.");
+            throw new IllegalArgumentException("Book not found with ID: " + id);
         }
     }
 
@@ -105,17 +105,16 @@ public class Data {
         int newTransactionId = generateNewTransactionId();
         Invoice invoice = new Invoice(newTransactionId, user, book, false);
         invoices.put(invoice.getId(), invoice);
+        user.addBorrowedBook(book); // addBorrowedBook metodunu User sınıfında tanımladım
         user.getBorrowedBooks().add(book);
         books.put(book.getBookId(), book);
     }
 
     public void returnBook(User user, Book book) {
-        int newTransactionId = generateNewTransactionId();
         Invoice invoice = invoices.get(book.getBookId());
         invoice.setReturned(true);
-        user.getBorrowedBooks().remove(book);
+        user.removeBorrowedBook(book); // removeBorrowedBook metodunu User sınıfında tanımladım
     }
-
     // USER METHODS
 
     public void addUser(User user){

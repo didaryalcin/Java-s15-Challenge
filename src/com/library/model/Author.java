@@ -1,5 +1,6 @@
 package com.library.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,10 +14,10 @@ public class Author {
         this.surname = surname;
     }
 
-    public Author(String name, String surname, List<Book> books) {
+    public Author(String name, String surname, List<Book> books) {  // books listesi null gelirse boş bir liste atama
         this.name = name;
         this.surname = surname;
-        this.books = books;
+        this.books = books == null ? new ArrayList<>() : new ArrayList<>(books);
     }
 
     public String getName() {
@@ -27,8 +28,23 @@ public class Author {
         return surname;
     }
 
+
+
+    // Books listesini güvenli bir şekilde dışarıya verme
     public List<Book> getBooks() {
-        return books;
+        return new ArrayList<>(books);
+    }
+
+    // Books listesine kitap ekleme
+    public void addBook(Book book) {
+        if (book != null && !books.contains(book)) {
+            books.add(book);
+        }
+    }
+
+    // Books listesinden kitap çıkarma
+    public void removeBook(Book book) {
+        books.remove(book);
     }
 
     public void setName(String name) {

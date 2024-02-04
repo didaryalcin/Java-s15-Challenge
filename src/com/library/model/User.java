@@ -96,4 +96,7 @@ public class User {
                 ", borrowedBooks=" + borrowedBooks +
                 '}';
     }
+
+    public void removeBorrowedBook(Book book) {
+    }
 }
