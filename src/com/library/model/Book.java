@@ -3,15 +3,15 @@ package com.library.model;
 import java.util.Objects;
 
 public class Book {
-    private int book_id;
+    private int bookId;
     private String title;
-    Author author;
-    Category category;
-    boolean isBorrowed;
+    private Author author;
+    private Category category;
+    private boolean isBorrowed;
     private User borrower;
 
-    public Book(int book_id, String title, Author author, Category category, boolean isBorrowed, User borrower) {
-        this.book_id = book_id;
+    public Book(int bookId, String title, Author author, Category category, boolean isBorrowed, User borrower) {
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.category = category;
@@ -19,27 +19,27 @@ public class Book {
         this.borrower = borrower;
     }
 
-    public Book(int book_id, String title, Author author, Category category) {
-        this.book_id = book_id;
+    public Book(int bookId, String title, Author author, Category category) {
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.category = category;
     }
 
-    public Book(int book_id, String title, Author author, Category category, boolean isBorrowed) {
-        this.book_id = book_id;
+    public Book(int bookId, String title, Author author, Category category, boolean isBorrowed) {
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.category = category;
         this.isBorrowed = isBorrowed;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public int getbookId() {
+        return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {
@@ -87,18 +87,18 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return book_id == book.book_id;
+        return bookId == book.bookId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(book_id);
+        return Objects.hash(bookId);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "book_id=" + book_id +
+                "bookId=" + bookId +
                 ", title='" + title + '\'' +
                 ", author=" + author +
                 ", category=" + category +

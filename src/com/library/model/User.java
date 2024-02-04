@@ -99,4 +99,10 @@ public class User {
 
     public void removeBorrowedBook(Book book) {
     }
+
+    public void info(String s) {
+    }
+
+    public void warn(String s) {
+    }
 }

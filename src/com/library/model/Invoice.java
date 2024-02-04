@@ -1,40 +1,34 @@
 package com.library.model;
 
+import java.time.LocalDate;
+
 public class Invoice {
-    private int id;
-    private User user;
-    private Book book;
+    private final int id; // Değişmez olduğunu belirtmek için final
+    private final User user; // Değişmez
+    private final Book book; // Değişmez
     private boolean returned;
+    private LocalDate issueDate; // Çıkış tarihi eklendi
+    private LocalDate dueDate; // Son teslim tarihi eklendi
 
     public Invoice(int id, User user, Book book, boolean returned) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.returned = returned;
+        this.issueDate = LocalDate.now();
+        this.dueDate = this.issueDate.plusWeeks(2);
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Book getBook() {
         return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
     }
 
     public boolean isReturned() {
