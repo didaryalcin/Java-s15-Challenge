@@ -15,14 +15,21 @@ public class UserService implements LibraryUserService{
 
     @Override
     public void addUser(User user) {
+        if (isEmailRegisteredBefore(user.getEmail())) {
+            throw new IllegalArgumentException("Email is already registered: " + user.getEmail());
+        }
+        // Şifreyi hash'le ve kullanıcıyı veri tabanına ekle
+        user.setPassword(hashPassword(user.getPassword()));
         data.addUser(user);
     }
 
     @Override
     public boolean authenticateUser(String email, String password) {
         User user = data.getUserByEmail(email);
-        return user != null && user.getPassword().equals(password);
+        // Hash'lenmiş şifre karşılaştırması yap
+        return user != null && user.getPassword().equals(hashPassword(password));
     }
+
 
     private String hashPassword(String password) {
         // Hashing şifreyi burada yapabiliriz
