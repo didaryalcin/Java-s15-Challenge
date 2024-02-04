@@ -40,23 +40,12 @@ public class BookRepo implements LibraryBookService {
 
     @Override
     public void updateBook(Book book) {
-        List<Book> booksWithSameTitle = data.getBooksByTitle(book.getTitle());
-
-        if (!booksWithSameTitle.isEmpty()) {
-            // Eşleşen kitaplar bulundu
-            for (Book matchingBook : booksWithSameTitle) {
-                if (matchingBook.getTitle() == book.getTitle()) {
-                    // Eşleşen kitaplar arasında ID eşleşiyorsa, bu kitabı güncelle
-                    data.updateBook(book);
-                    System.out.println("Book information updated.");
-                    return;
-                }
-            }
-            // Eşleşen kitaplar arasında ID eşleşmeyen bir kitap bulundu
-            System.out.println("Book with the same title found, but different ID.");
+        Book existingBook = data.getBookById(book.getBookId());
+        if (existingBook != null) {
+            data.updateBook(book);
+            System.out.println("Book information updated.");
         } else {
-            // Eşleşen kitap bulunamadı
-            System.out.println("Book not found.");
+            System.out.println("Book not found with ID: " + book.getBookId());
         }
     }
 
@@ -80,15 +69,14 @@ public class BookRepo implements LibraryBookService {
         if (user.getBorrowedBooks().size() < 5 && !book.isBorrowed()) {
             data.borrowBook(user, book);
             book.setBorrowed(true);
-            book.setBorrower(user);
-            user.info("Book borrowed successfully.");
+            user.addBorrowedBook(book); // Bu metot User sınıfında olmalı.
+            System.out.println("Book borrowed successfully.");
         } else if (book.isBorrowed()) {
-            user.warn("Book is already borrowed by another user.");
+            System.out.println("Book is already borrowed by another user.");
         } else {
-            user.warn("User has reached the borrowing limit.");
+            System.out.println("User has reached the borrowing limit.");
         }
     }
-
     @Override
     public void returnBook(User user, Book book) {
         if (book.isBorrowed() && book.getBorrower().equals(user)) {

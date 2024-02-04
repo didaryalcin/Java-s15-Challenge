@@ -46,7 +46,7 @@ public class Data {
         Book book2 = new Book(2, "Göz", author2, Category.FEAR);
         Book book3 = new Book(3, "Foundation", author3, Category.SCIENCEFICTION);
 
-        books.put(book1.getbookId(), book1);
+        books.put(book1.getBookId(), book1);
         books.put(book2.getBookId(), book2);
         books.put(book3.getBookId(), book3);
     }
