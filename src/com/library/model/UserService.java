@@ -24,10 +24,21 @@ public class UserService implements LibraryUserService{
         return user != null && user.getPassword().equals(password);
     }
 
+    private String hashPassword(String password) {
+        // Hashing şifreyi burada yapabiliriz
+        return Integer.toString(password.hashCode());
+    }
+
     @Override
     public void deleteUser(int userId) {
-        data.deleteUser(userId);
+        User user = data.getUserById(userId);
+        if (user != null) {
+            data.deleteUser(userId);
+        } else {
+            throw new IllegalStateException("User not found with ID: " + userId);
+        }
     }
+
 
     public boolean isEmailRegisteredBefore(String email) {
         User user = data.getUserByEmail(email);

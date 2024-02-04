@@ -1,5 +1,6 @@
 package com.library.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private String password;
+    private String passwordHash; // Şifre hash'lenmiş olarak saklanmalı
     private List<Book> borrowedBooks;
 
     public User(int userId, String name, String surname, String email, String password, List<Book> borrowedBooks) { // Değiştirilen isim: user_id yerine userId
@@ -16,10 +17,9 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.password = password;
-        this.borrowedBooks = borrowedBooks;
+        this.setPassword(password); // Şifre hash'lenerek atanmalı
+        this.borrowedBooks = borrowedBooks != null ? borrowedBooks : new ArrayList<>();
     }
-
     public int getUserId() {
         return userId;
     }
@@ -53,11 +53,11 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return passwordHash;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.passwordHash = password;
     }
 
     public List<Book> getBorrowedBooks() {
@@ -87,12 +87,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "UserService{" +
+        return "User{" +
                 "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                // Şifre yazdırılmamalı
                 ", borrowedBooks=" + borrowedBooks +
                 '}';
     }
