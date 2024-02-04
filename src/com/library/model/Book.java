@@ -34,7 +34,7 @@ public class Book {
         this.isBorrowed = isBorrowed;
     }
 
-    public int getbookId() {
+    public int getBookId() {
         return bookId;
     }
 
@@ -106,7 +106,5 @@ public class Book {
                 '}';
     }
 
-    public Integer getBookId() {
-        return null;
-    }
+
 }
