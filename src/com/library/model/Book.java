@@ -10,28 +10,11 @@ public class Book {
     private boolean isBorrowed;
     private User borrower;
 
-    public Book(int bookId, String title, Author author, Category category, boolean isBorrowed, User borrower) {
-        this.bookId = bookId;
-        this.title = title;
-        this.author = author;
-        this.category = category;
-        this.isBorrowed = isBorrowed;
-        this.borrower = borrower;
-    }
-
     public Book(int bookId, String title, Author author, Category category) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.category = category;
-    }
-
-    public Book(int bookId, String title, Author author, Category category, boolean isBorrowed) {
-        this.bookId = bookId;
-        this.title = title;
-        this.author = author;
-        this.category = category;
-        this.isBorrowed = isBorrowed;
     }
 
     public int getBookId() {
