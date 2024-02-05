@@ -20,10 +20,11 @@ public class Author {
         this.books = books == null ? new ArrayList<>() : new ArrayList<>(books);
     }
 
+
+    //getName(), getSurname(): Yazarın adını ve soyadını döndürür.
     public String getName() {
         return name;
     }
-
     public String getSurname() {
         return surname;
     }
@@ -47,6 +48,9 @@ public class Author {
         books.remove(book);
     }
 
+
+    //setName(String name),
+    // setSurname(String surname): Yazarın adını ve soyadını günceller.
     public void setName(String name) {
         this.name = name;
     }
@@ -55,6 +59,8 @@ public class Author {
         this.surname = surname;
     }
 
+
+    //setBooks(List<Book> books): Yazarın kitap listesini günceller.
     public void setBooks(List<Book> books) {
         this.books = books;
     }
@@ -65,7 +71,7 @@ public class Author {
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
         return Objects.equals(name, author.name) && Objects.equals(surname, author.surname);
-    }
+    } //. equals metodu, iki yazarın aynı olup olmadığını ad ve soyad bilgilerine göre karşılaştırır.
 
     @Override
     public int hashCode() {
