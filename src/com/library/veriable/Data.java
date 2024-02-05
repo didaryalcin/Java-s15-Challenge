@@ -15,6 +15,7 @@ public class Data {
     public int generateNewTransactionId() {
         return invoiceIdCounter.getAndIncrement();
     }
+    //invoiceIdCounter: Fatura oluşturulduğunda işlem ID'si üretmek için kullanılır.
 
     private Map<Integer, Book> books = new ConcurrentHashMap<>();
     private Map<Integer, User> users = new ConcurrentHashMap<>();
@@ -54,24 +55,32 @@ public class Data {
     public void addBook(Book book){
         books.put(book.getBookId(), book);
     }
+    //addBook Yeni bir kitap ekler.
 
     public Book getBookById(int id){
         return books.get(id);
     }
+    //getBookById: ID'si verilen kitabı döndürür.
 
     public List<Book> getBooksByTitle(String title) {
+        //getBooksByTitle: Belirli bir başlığa sahip kitapları listeler.
+
         return books.values().stream()
                 .filter(book -> book.getTitle().equals(title))
                 .collect(Collectors.toList());
     }
 
     public List<Book> getBooksByAuthor(String authorName) {
+        //getBooksByAuthor: Belirli bir yazar adına sahip kitapları listeler.
+
         return books.values().stream()
                 .filter(book -> book.getAuthor().getName().equals(authorName))
                 .collect(Collectors.toList());
     }
 
     public void updateBook(Book book) {
+        //updateBook: Var olan bir kitabın bilgilerini günceller.
+
         if(books.containsKey(book.getBookId())){
             books.put(book.getBookId(), book);
             System.out.println("Book information updated.");
@@ -82,6 +91,8 @@ public class Data {
     }
 
     public void deleteBook(int id) {
+        //deleteBook: Bir kitabı sistemden kaldırır.
+
         if (books.containsKey(id)) {
             books.remove(id);
         } else {
@@ -90,18 +101,25 @@ public class Data {
     }
 
     public List<Book> getBooksByCategory(Category category) {
+        //getBooksByCategory: Belirli bir kategoriye ait kitapları listeler.
+
         return books.values().stream()
                 .filter(book -> book.getCategory().equals(category))
                 .collect(Collectors.toList());
     }
 
     public List<Book> getBooksByAuthor(Author author) {
+        //getBooksByAuthor(Author author): Belirli bir yazarın tüm kitaplarını listeler.
+
         return books.values().stream()
                 .filter(book -> book.getAuthor().equals(author))
                 .collect(Collectors.toList());
+
+
     }
 
     public void borrowBook(User user, Book book) {
+
         int newTransactionId = generateNewTransactionId();
         Invoice invoice = new Invoice(newTransactionId, user, book, false);
         invoices.put(invoice.getId(), invoice);
@@ -115,17 +133,21 @@ public class Data {
         invoice.setReturned(true);
         user.removeBorrowedBook(book); // removeBorrowedBook metodunu User sınıfında tanımladım
     }
-    // USER METHODS
+
+    //////// USER METHOD (KULLANICI İŞLEMLERİ)  ////////
 
     public void addUser(User user){
+        //addUser: Yeni bir kullanıcı ekler.
         users.put(user.getUserId(), user);
     }
 
     public User getUserById(int id) {
+        //getUserById: ID'si verilen kullanıcıyı döndürür.
         return users.get(id);
     }
 
     public User getUserByEmail(String email) {
+        //getUserByEmail: E-posta adresine göre kullanıcıyı döndürür.
         return users.values().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
@@ -133,18 +155,22 @@ public class Data {
     }
 
     public void updateUser(User user) {
+        //updateUser: Var olan bir kullanıcının bilgilerini günceller.
         users.put(user.getUserId(), user);
     }
 
     public void deleteUser(int id) {
+        //deleteUser: Bir kullanıcıyı sistemden kaldırır.
         users.remove(id);
     }
 
     public List<User> getAllUsers() {
+        //getAllUsers: Sisteme kayıtlı tüm kullanıcıları listeler.
         return new ArrayList<>(users.values());
     }
 
     public List<Book> getAllBooksDatabase() {
+        //getAllBooksDatabase: Sisteme kayıtlı tüm kitapları döndürür.
         return books.values().stream().toList();
     }
 
