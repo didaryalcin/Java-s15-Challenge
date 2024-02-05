@@ -38,6 +38,7 @@ public class UserService implements LibraryUserService{
 
     @Override
     public void deleteUser(int userId) {
+        // ID'ye sahip kullanıcıyı siler,kullanıcı bulunamazsa hata gönderir
         User user = data.getUserById(userId);
         if (user != null) {
             data.deleteUser(userId);
@@ -48,6 +49,7 @@ public class UserService implements LibraryUserService{
 
 
     public boolean isEmailRegisteredBefore(String email) {
+        // e-posta adresinin kayıtlı olup olmadığını kontrol eder.
         User user = data.getUserByEmail(email);
         return user != null;
     }

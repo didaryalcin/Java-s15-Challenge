@@ -9,8 +9,8 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private String passwordHash; // Şifre hash'lenmiş olarak saklanmalı
-    private List<Book> borrowedBooks;
+    private String passwordHash; // Güvenlik sebebi ile şifre hash'li
+    private List<Book> borrowedBooks; // Kullanıcının ödünç aldığı kitapların listesi
 
     public User(int userId, String name, String surname, String email, String password, List<Book> borrowedBooks) { // Değiştirilen isim: user_id yerine userId
         this.userId = userId;

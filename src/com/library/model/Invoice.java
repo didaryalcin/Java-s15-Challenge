@@ -3,12 +3,12 @@ package com.library.model;
 import java.time.LocalDate;
 
 public class Invoice {
-    private final int id; // Değişmez olduğunu belirtmek için final
-    private final User user; // Değişmez
-    private final Book book; // Değişmez
-    private boolean returned;
-    private LocalDate issueDate; // Çıkış tarihi eklendi
-    private LocalDate dueDate; // Son teslim tarihi eklendi
+    private final int id; // Fatura tanımlayıcısı final
+    private final User user; // Faturanın düzenlendiği kullanıcıfinal
+    private final Book book; //  Faturada ödünç alınan kitap
+    private boolean returned; //  Kitabın iade edilip edilmediğini belirten boolean bir değer.
+    private LocalDate issueDate; // Faturanın oluşturulduğu tarih
+    private LocalDate dueDate; // Kitabın iade edilmesi gereken son tarih.
 
     public Invoice(int id, User user, Book book, boolean returned) {
         this.id = id;
