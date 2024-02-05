@@ -7,8 +7,8 @@ public class Book {
     private String title;
     private Author author;
     private Category category;
-    private boolean isBorrowed;
-    private User borrower;
+    private boolean isBorrowed; //Kitabın ödünç alınıp alınmadığını gösteren bir boolean.
+    private User borrower;// Kitabı ödünç alan User nesnesi.
 
     public Book(int bookId, String title, Author author, Category category) {
         this.bookId = bookId;

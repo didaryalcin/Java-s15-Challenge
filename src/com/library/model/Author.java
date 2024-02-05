@@ -36,18 +36,6 @@ public class Author {
         return new ArrayList<>(books);
     }
 
-    // Books listesine kitap ekleme
-    public void addBook(Book book) {
-        if (book != null && !books.contains(book)) {
-            books.add(book);
-        }
-    }
-
-    // Books listesinden kitap çıkarma
-    public void removeBook(Book book) {
-        books.remove(book);
-    }
-
 
     //setName(String name),
     // setSurname(String surname): Yazarın adını ve soyadını günceller.

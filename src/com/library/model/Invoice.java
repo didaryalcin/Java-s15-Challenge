@@ -18,6 +18,9 @@ public class Invoice {
         this.issueDate = LocalDate.now();
         this.dueDate = this.issueDate.plusWeeks(2);
     }
+    //issueDate otomatik olarak o anki tarihe (LocalDate.now()) ayarlanır
+    // dueDate için bu tarihten itibaren iki hafta sonrası belirlenir.
+
 
     public int getId() {
         return id;
@@ -35,6 +38,8 @@ public class Invoice {
         return returned;
     }
 
+
+    // Kitabın iade durumunu güncelleyen metod.
     public void setReturned(boolean returned) {
         this.returned = returned;
     }

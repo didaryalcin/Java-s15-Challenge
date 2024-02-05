@@ -5,40 +5,45 @@ import com.library.veriable.Data;
 
 import java.util.List;
 
-public class BookRepo implements LibraryBookService {
+public class BookRepo implements LibraryBookService { //LibraryBookService arayüzünü uygulayan
+
 
     private Data data;
+
+    //Data sınıfının bir örneğini alır
+    // bu veri deposunu kullanarak kitaplar üzerinde işlemler yapar.
     public BookRepo(Data data){
         this.data = data;
     }
 
-    @Override
+    @Override //Sisteme yeni bir kitap ekler ve başarılı olduğunu bildirir.
     public void addBook(Book book){
         data.addBook(book);
         System.out.println("Book added successfully.");
     }
 
-    @Override
+    @Override //Belirli bir ID'ye sahip kitabı döndürür.
     public Book getBookById(int id){
         return data.getBookById(id);
     }
 
-    @Override
+    @Override //Tüm kitapları listeler.
     public List<Book> getAllBooks() {
         return data.getAllBooksDatabase();
     }
 
-    @Override
+    @Override //Başlığına göre kitapları listeler.
     public List<Book> getBooksByTitle(String title){
         return data.getBooksByTitle(title);
     }
 
-    @Override
+    @Override //Yazar adına göre kitapları listeler.
     public List<Book> getBooksByAuthor(String authorName){
         return data.getBooksByAuthor(authorName);
     }
 
-    @Override
+    @Override //Var olan bir kitabın bilgilerini günceller.
+    // kitabın başlığına göre arama sonucu kitap listesi üzerinden gerçekleştirilir.
     public void updateBook(Book book) {
         Book existingBook = data.getBookById(book.getBookId());
         if (existingBook != null) {
@@ -49,22 +54,23 @@ public class BookRepo implements LibraryBookService {
         }
     }
 
-    @Override
+    @Override // Bir kitabı sistemden kaldırır.
     public void deleteBook(int id){
         data.deleteBook(id);
     }
 
-    @Override
+    @Override //Kategoriye göre kitapları listeler.
     public List<Book> getBooksByCategory(Category category) {
         return data.getBooksByCategory(category);
     }
 
-    @Override
+    @Override //Author nesnesine göre kitapları listeler.
     public List<Book> getBooksByAuthor(Author author) {
         return data.getBooksByAuthor(author);
     }
 
-    @Override
+    @Override //: Bir kullanıcıya kitap ödünç verir. Bir kullanıcı max 5 kitap alabilir
+            // kitap zaten ödünç alınmışsa ödünç verme işlemi gerçekleştirilmez.
     public void borrowBook(User user, Book book) {
         if (user.getBorrowedBooks().size() < 5 && !book.isBorrowed()) {
             data.borrowBook(user, book);
@@ -77,7 +83,7 @@ public class BookRepo implements LibraryBookService {
             System.out.println("User has reached the borrowing limit.");
         }
     }
-    @Override
+    @Override  // Kullanıcının ödünç aldığı bir kitabı iade etmesini işler.
     public void returnBook(User user, Book book) {
         if (book.isBorrowed() && book.getBorrower().equals(user)) {
             data.returnBook(user, book);

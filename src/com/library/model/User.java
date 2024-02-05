@@ -64,6 +64,9 @@ public class User {
         return borrowedBooks;
     }
 
+
+
+    //Kullanıcının ödünç aldığı kitap listesine yeni bir kitap ekler.
     public void addBorrowedBook(Book book) {
         borrowedBooks.add(book);
     }
@@ -97,12 +100,11 @@ public class User {
                 '}';
     }
 
+
+
+    //Kullanıcının ödünç aldığı kitap listesinden bir kitabı kaldırır.
+    // Bu metot şu anda boş ve işlevselliği tanımlamadım !!
     public void removeBorrowedBook(Book book) {
     }
 
-    public void info(String s) {
-    }
-
-    public void warn(String s) {
-    }
 }
