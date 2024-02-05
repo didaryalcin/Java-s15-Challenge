@@ -9,33 +9,40 @@ import java.util.Scanner;
 
 public class LibraryApp {
 
-    private static Scanner scanner = new Scanner(System.in);
+
     // Kullanıcı girişlerini okumak için kullan
+    private static Scanner scanner = new Scanner(System.in);
 
 
-    private static Data data = new Data();
+
     // Veri depolama ve yönetim işlevlerini içeren Data sınıfının bir örneği.
+    private static Data data = new Data();
 
 
-    private static UserService userService = new UserService(data);
+
     //Kullanıcı işlemlerini yöneten
+    private static UserService userService = new UserService(data);
 
 
-    private static BookRepo bookRepo = new BookRepo(data);
+
     //Kitap işlemlerini yöneten
+    private static BookRepo bookRepo = new BookRepo(data);
 
-    private static User currentUser = null;
+
+
     //Aktif kullanıcıyı tutan
+    private static User currentUser = null;
+
 
     public static void main(String[] args) {
         loginOrRegister();
     }
 
+
+
+    // Kullanıcılara giriş yapma, yeni kullanıcı oluşturma veya çıkış yapma seçenekleri sunar.
+    //Kullanıcı seçimine göre ilgili metotları (login, newUser) çağırır veya uygulamadan çıkar.
     private static void loginOrRegister(){
-        // Kullanıcılara giriş yapma, yeni kullanıcı oluşturma veya çıkış yapma seçenekleri sunar.
-        //Kullanıcı seçimine göre ilgili metotları (login, newUser) çağırır veya uygulamadan çıkar.
-
-
         while (true) {
             if (currentUser == null) {
                 System.out.println("1. Login");
@@ -69,10 +76,10 @@ public class LibraryApp {
         }
     }
 
-    private static User login() {
-        //Kullanıcının e-posta ve şifre bilgilerini alır ve doğrulama yapar.
-        //Doğrulama başarılı olursa, ana menüye yönlendirir.
 
+    //Kullanıcının e-posta ve şifre bilgilerini alır ve doğrulama yapar.
+    //Doğrulama başarılı olursa, ana menüye yönlendirir.
+    private static User login() {
         System.out.print("Enter your email: ");
         String email = scanner.nextLine();
 
@@ -112,10 +119,11 @@ public class LibraryApp {
         System.out.println("New user registered successfully!");
     }
 
-    private static void mainMenu() {
-        //Kullanıcılara kitap eklemek, seçmek, güncellemek, silmek, ödünç almak, iade etmek, fatura üretmek, kitapları listelemek, oturumu kapatmak ve uygulamadan çıkmak seçenekleri sunar.
-        //Kullanıcı seçimine göre ilgili metotları çağırır.
 
+
+    //Kullanıcılara kitap eklemek, seçmek, güncellemek, silmek, ödünç almak, iade etmek, fatura üretmek, kitapları listelemek, oturumu kapatmak ve uygulamadan çıkmak seçenekleri sunar.
+    //Kullanıcı seçimine göre ilgili metotları çağırır.
+    private static void mainMenu() {
         while (true) {
             System.out.println("1. Add New Book");
             System.out.println("2. Select Book");
@@ -171,9 +179,11 @@ public class LibraryApp {
         }
     }
 
+
+
+    //Yeni kitap bilgilerini (başlık, yazar adı, yazar soyadı, kategori) alır
+    // BookRepo üzerinden yeni bir kitap ekler.
     private static void addNewBook() {
-        //Yeni kitap bilgilerini (başlık, yazar adı, yazar soyadı, kategori) alır
-        // BookRepo üzerinden yeni bir kitap ekler.
 
         System.out.print("Enter book title: ");
         String title = scanner.nextLine();
@@ -192,9 +202,10 @@ public class LibraryApp {
         bookRepo.addBook(newBook);
     }
 
-    private static void selectBook() {
-        //Kullanıcıdan kitap ID'si alır ve bu ID'ye sahip kitabı BookRepo üzerinden seçer.
 
+
+    //Kullanıcıdan kitap ID'si alır ve bu ID'ye sahip kitabı BookRepo üzerinden seçer.
+    private static void selectBook() {
         System.out.print("Enter book ID: ");
         int bookId = scanner.nextInt();
         scanner.nextLine();
@@ -207,8 +218,9 @@ public class LibraryApp {
         }
     }
 
+
+    //Güncelleme (başlık, yazar adı, yazar soyadı, kategori) alarak kitabı günceller.
     private static void updateBookInfo(){
-        //Güncelleme (başlık, yazar adı, yazar soyadı, kategori) alarak kitabı günceller.
         System.out.println("Enter the book ID you want to update: ");
         int bookId= scanner.nextInt();
         scanner.nextLine();
@@ -255,9 +267,10 @@ public class LibraryApp {
         }
     }
 
+
+    //Silinecek kitabın ID'sini alır ve kullanıcıdan silme onayı ister.
+    // Onay alınırsa, kitabı BookRepo üzerinden siler.
     private static void deleteBook() {
-        //Silinecek kitabın ID'sini alır ve kullanıcıdan silme onayı ister.
-        // Onay alınırsa, kitabı BookRepo üzerinden siler.
         System.out.print("Enter the book ID you want to delete: ");
         listBook();
         int bookId = scanner.nextInt();
@@ -280,9 +293,9 @@ public class LibraryApp {
         }
     }
 
-    private static void listBook(){
-        //BookRepo üzerinden tüm kitapları listeler.
 
+    //BookRepo üzerinden tüm kitapları listeler.
+    private static void listBook(){
         List<Book> allBooks = bookRepo.getAllBooks();
         if (!allBooks.isEmpty()){
             System.out.println("Book list: ");

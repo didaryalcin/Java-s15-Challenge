@@ -13,20 +13,18 @@ public class UserService implements LibraryUserService{
         this.data = data;
     }
 
-    @Override
+    @Override //Şifreyi hash'le ve kullanıcıyı veri tabanına ekle
     public void addUser(User user) {
         if (isEmailRegisteredBefore(user.getEmail())) {
             throw new IllegalArgumentException("Email is already registered: " + user.getEmail());
         }
-        // Şifreyi hash'le ve kullanıcıyı veri tabanına ekle
         user.setPassword(hashPassword(user.getPassword()));
         data.addUser(user);
     }
 
-    @Override
+    @Override //// Hash'lenmiş şifre karşılaştırması yap
     public boolean authenticateUser(String email, String password) {
         User user = data.getUserByEmail(email);
-        // Hash'lenmiş şifre karşılaştırması yap
         return user != null && user.getPassword().equals(hashPassword(password));
     }
 
@@ -36,9 +34,8 @@ public class UserService implements LibraryUserService{
         return Integer.toString(password.hashCode());
     }
 
-    @Override
+    @Override //// ID'ye sahip kullanıcıyı siler,kullanıcı bulunamazsa hata gönderir
     public void deleteUser(int userId) {
-        // ID'ye sahip kullanıcıyı siler,kullanıcı bulunamazsa hata gönderir
         User user = data.getUserById(userId);
         if (user != null) {
             data.deleteUser(userId);
@@ -48,8 +45,8 @@ public class UserService implements LibraryUserService{
     }
 
 
+    //// e-posta adresinin kayıtlı olup olmadığını kontrol eder.
     public boolean isEmailRegisteredBefore(String email) {
-        // e-posta adresinin kayıtlı olup olmadığını kontrol eder.
         User user = data.getUserByEmail(email);
         return user != null;
     }
